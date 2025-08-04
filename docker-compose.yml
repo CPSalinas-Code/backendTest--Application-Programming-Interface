@@ -1,63 +1,63 @@
 version: '3.8'
 
 services:
-  # Servicio de la Base de Datos (un solo SQL Server para ambas APIs)
+  # Servicio de la Base de Datos PostgreSQL
   db:
     build: ./database
-    container_name: mssql_db
+    container_name: postgres_db
     environment:
-      SA_PASSWORD: "dbpasswordtestCS123"
-      ACCEPT_EULA: "Y"
-      MSSQL_DB: customerperson_db
+      POSTGRES_DB: customerperson_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: dbpasswordtestCS123
     ports:
-      - "1433:1433"
+      - "5432:5432"
     volumes:
-      - db_data:/var/opt/mssql
+      - postgres_data:/var/lib/postgresql/data
 
-  # Servicio de Mensajería RabbitMQ para comunicacion asincrona que pide el requerimiento
+  # Servicio de Mensajería RabbitMQ
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
     ports:
-      - "5672:5672"  # Puerto para las aplicaciones
-      - "15672:15672" # Puerto para la interfaz web de gestión
+      - "5672:5672"
+      - "15672:15672"
 
   # Microservicio de Clientes
   clients-app:
     build:
-      context: ./microservice-clients # Directorio donde está su Dockerfile
+      context: ./microservice-clients
     container_name: clients-app
     restart: on-failure
     ports:
       - "8080:8080"
     environment:
-      # Sobrescribimos la URL de la BD para que apunte al contenedor 'db'
-      - SPRING_DATASOURCE_URL=jdbc:sqlserver://db:1433;databaseName=customerperson_db;trustServerCertificate=true
-      - SPRING_DATASOURCE_USERNAME=sa
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/customerperson_db
+      - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=dbpasswordtestCS123
+      - SPRING_RABBITMQ_HOST=rabbitmq
     depends_on:
-      - db # No arrancar hasta que la base de datos esté lista
+      - db
+      - rabbitmq
 
   # Microservicio de Cuentas y Movimientos
   accounts-app:
     build:
-      context: ./microservice-accounts # Directorio donde está su Dockerfile
+      context: ./microservice-accounts
     container_name: accounts-app
     restart: on-failure
     ports:
       - "8081:8081"
     environment:
-      # Sobrescribimos las URLs para que apunten a los otros contenedores por su nombre de servicio
-      - SPRING_DATASOURCE_URL=jdbc:sqlserver://db:1433;databaseName=customerperson_db;trustServerCertificate=true
-      - SPRING_DATASOURCE_USERNAME=sa
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/customerperson_db
+      - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=dbpasswordtestCS123
-      - SPRING_RABBITMQ_HOST=rabbitmq # Apunta al contenedor de RabbitMQ
-      - CLIENT_SERVICE_BASE_URL=http://clients-app:8080/api # Apunta al microservicio de clientes
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - CLIENT_SERVICE_BASE_URL=http://clients-app:8080/api
     depends_on:
       - db
       - rabbitmq
-      - clients-app # No arrancar hasta que todos los demás estén listos
+      - clients-app
 
 # Volumen para persistir los datos de la base de datos
 volumes:
-  db_data:
+  postgres_data:
