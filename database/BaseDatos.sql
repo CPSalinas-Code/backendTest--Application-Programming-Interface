@@ -1,7 +1,4 @@
-CREATE DATABASE customerperson_db;
-
 USE customerperson_db;
-GO
 
 CREATE TABLE person (
     id BIGINT IDENTITY(1,1) PRIMARY KEY,
@@ -12,16 +9,16 @@ CREATE TABLE person (
     address VARCHAR(255),
     phone VARCHAR(255)
 );
-GO
+
 
 CREATE TABLE customers (
-    id BIGINT PRIMARY KEY, -- Mismo valor que en person.id
+    id BIGINT PRIMARY KEY,
     customer_id VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     status BIT NOT NULL,
     CONSTRAINT FK_customers_person FOREIGN KEY (id) REFERENCES person(id)
 );
-GO
+
 
 CREATE TABLE accounts (
     id BIGINT IDENTITY(1,1) PRIMARY KEY,
@@ -44,8 +41,5 @@ CREATE TABLE movements (
     REFERENCES accounts(id)
 );
 
--- Creación de un índice en account_id para mejorar el rendimiento de las búsquedas de movimientos por cuenta
 CREATE INDEX IX_Movements_AccountId ON movements(account_id);
-
--- Creación de un índice en customer_id para mejorar el rendimiento de las búsquedas de cuentas por cliente
 CREATE INDEX IX_Accounts_CustomerId ON accounts(customer_id);

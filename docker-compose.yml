@@ -3,7 +3,7 @@ version: '3.8'
 services:
   # Servicio de la Base de Datos (un solo SQL Server para ambas APIs)
   db:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    build: ./database
     container_name: mssql_db
     environment:
       SA_PASSWORD: "dbpasswordtestCS123"
@@ -13,10 +13,6 @@ services:
       - "1433:1433"
     volumes:
       - db_data:/var/opt/mssql
-      # Script de inicializacion
-      # en dev Hibernate crea automaticamente las tablas al encontrar clases con @Entity
-      # pero al definir el script se asemeja mas a produccion
-      - ./database/BaseDatos.sql:/docker-entrypoint-initdb.d/init.sql
 
   # Servicio de Mensajería RabbitMQ para comunicacion asincrona que pide el requerimiento
   rabbitmq:
@@ -31,11 +27,12 @@ services:
     build:
       context: ./microservice-clients # Directorio donde está su Dockerfile
     container_name: clients-app
+    restart: on-failure
     ports:
       - "8080:8080"
     environment:
       # Sobrescribimos la URL de la BD para que apunte al contenedor 'db'
-      - SPRING_DATASOURCE_URL=jdbc:sqlserver://db:1433;databaseName=ClientDB;trustServerCertificate=true
+      - SPRING_DATASOURCE_URL=jdbc:sqlserver://db:1433;databaseName=customerperson_db;trustServerCertificate=true
       - SPRING_DATASOURCE_USERNAME=sa
       - SPRING_DATASOURCE_PASSWORD=dbpasswordtestCS123
     depends_on:
@@ -46,11 +43,12 @@ services:
     build:
       context: ./microservice-accounts # Directorio donde está su Dockerfile
     container_name: accounts-app
+    restart: on-failure
     ports:
       - "8081:8081"
     environment:
       # Sobrescribimos las URLs para que apunten a los otros contenedores por su nombre de servicio
-      - SPRING_DATASOURCE_URL=jdbc:sqlserver://db:1433;databaseName=AccountsDB;trustServerCertificate=true
+      - SPRING_DATASOURCE_URL=jdbc:sqlserver://db:1433;databaseName=customerperson_db;trustServerCertificate=true
       - SPRING_DATASOURCE_USERNAME=sa
       - SPRING_DATASOURCE_PASSWORD=dbpasswordtestCS123
       - SPRING_RABBITMQ_HOST=rabbitmq # Apunta al contenedor de RabbitMQ
