@@ -28,11 +28,11 @@ class PersonServiceImplTest {
         System.out.println("Iniciando test: testCreatePerson");
         // Arrange
         PersonDTO dto = new PersonDTO();
-        dto.setName("Juan Perez");
+        dto.setName("Christian Salinas");
         dto.setGender("M");
         dto.setAge(30);
         dto.setIdentification("1234567890");
-        dto.setAddress("Calle Falsa 123");
+        dto.setAddress("Quito Ecuador");
         dto.setPhone("0999999999");
 
         Person person = new Person();
@@ -52,7 +52,7 @@ class PersonServiceImplTest {
         // Assert
         System.out.println("Resultado: " + result);
         assertNotNull(result);
-        assertEquals("Juan Perez", result.getName());
+        assertEquals("Christian Salinas", result.getName());
         assertEquals("1234567890", result.getIdentification());
         System.out.println("testCreatePerson finalizado correctamente\n");
     }
@@ -63,11 +63,11 @@ class PersonServiceImplTest {
         // Arrange
         Person person = new Person();
         person.setId(1L);
-        person.setName("Juan Perez");
+        person.setName("Christian Salinas");
         person.setGender("M");
         person.setAge(30);
         person.setIdentification("1234567890");
-        person.setAddress("Calle Falsa 123");
+        person.setAddress("Quito Ecuador");
         person.setPhone("0999999999");
 
         when(personRepository.findById(1L)).thenReturn(Optional.of(person));
@@ -79,7 +79,7 @@ class PersonServiceImplTest {
         System.out.println("Resultado: " + result);
         assertNotNull(result);
         assertEquals(1L, result.getId());
-        assertEquals("Juan Perez", result.getName());
+        assertEquals("Christian Salinas", result.getName());
         System.out.println("testGetPersonById finalizado correctamente\n");
     }
 
@@ -89,20 +89,20 @@ class PersonServiceImplTest {
         // Arrange
         Long id = 1L;
         PersonDTO dto = new PersonDTO();
-        dto.setName("Juan Perez Modificado");
+        dto.setName("Christian Salinas Modificado");
         dto.setGender("M");
         dto.setAge(31);
         dto.setIdentification("1234567890");
-        dto.setAddress("Calle Nueva 456");
+        dto.setAddress("Quito Ecuador Fail");
         dto.setPhone("0999999998");
 
         Person existing = new Person();
         existing.setId(id);
-        existing.setName("Juan Perez");
+        existing.setName("Christian Salinas");
         existing.setGender("M");
         existing.setAge(30);
         existing.setIdentification("1234567890");
-        existing.setAddress("Calle Falsa 123");
+        existing.setAddress("Quito Ecuador Fail");
         existing.setPhone("0999999999");
 
         // El mock devuelve el objeto sin actualizar el nombre
@@ -113,9 +113,9 @@ class PersonServiceImplTest {
         PersonDTO result = personService.updatePerson(id, dto);
 
         // Assert
-        System.out.println("Resultado esperado: Juan Perez Modificado");
+        System.out.println("Resultado esperado: Christian Salinas Modificado");
         System.out.println("Resultado real: " + result.getName());
-        assertEquals("Juan Perez Modificado", result.getName());
+        assertEquals("Christian Salinas Modificado", result.getName());
         System.out.println("testUpdatePerson_FailsWhenNameIsNotUpdated finalizado\n");
     }
 }

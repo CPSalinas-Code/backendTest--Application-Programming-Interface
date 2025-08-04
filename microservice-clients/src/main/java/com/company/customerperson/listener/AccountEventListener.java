@@ -11,14 +11,15 @@ public class AccountEventListener {
 
     private static final Logger logger = LoggerFactory.getLogger(AccountEventListener.class);
 
-    // Esta anotación hace que este método escuche la cola especificada.
+    // la anotacion hace que el metodo escuche la cola de mensajes
     // Spring lo invoca automáticamente cuando llega un mensaje.
     @RabbitListener(queues = "accounts.created.queue")
     public void handleAccountCreatedEvent(AccountCreatedEventDTO event) {
+
+
+        logger.info("Comunicacion Asincrona RabbitMQ");
         logger.info("Evento recibido al crear una cuenta en el microservicio-accounts: {}", event.toString());
 
-        // Aquí podríamos añadir lógica de negocio si fuera necesario.
-        // Por ejemplo, marcar al cliente como "activo" o enviarle un email de bienvenida.
-        // Por ahora, solo registrar el evento es suficiente para demostrar la comunicación.
+        // Se puede anadir mas logica de negocio, por el momento es una muestra de lo que pide el requerimiento sobre comunicacion asincrona
     }
 }

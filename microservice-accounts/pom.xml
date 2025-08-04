@@ -91,6 +91,17 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
+		<!-- Dependencias para pruebas unitarias y de integracion-->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-contract-stub-runner</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
