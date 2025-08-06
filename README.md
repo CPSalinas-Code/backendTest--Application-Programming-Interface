@@ -1,9 +1,10 @@
-# Proyecto de Microservicios Bancarios 
+# Proyecto de Microservicios Bancarios
 
 ## Descripción General
 
-Este proyecto implementa una arquitectura de microservicios para simular las operaciones básicas de un sistema bancario. La solución está compuesta por dos microservicios principales, una base de datos centralizada y un bus de mensajería para la comunicación asíncrona, todo orquestado a través de Docker Compose para un despliegue sencillo.
+Este proyecto implementa una arquitectura de microservicios para simular las operaciones básicas de un sistema bancario. La solución está compuesta por dos microservicios principales, una base de datos centralizada, un bus de mensajería para la comunicación asíncrona y un **API Gateway** como punto de entrada único, todo orquestado a través de Docker Compose para un despliegue sencillo.
 
+*   **api-gateway:** Punto de entrada único (`Single Point of Entry`) para todas las solicitudes de los clientes. Enruta las peticiones a los microservicios correspondientes y expone la API al exterior.
 *   **microservice-clients:** Gestiona toda la información relacionada con las personas y los clientes (CRUD).
 *   **microservice-accounts:** Gestiona las cuentas bancarias y los movimientos asociados (CRUD, lógica de negocio de saldos, reportes).
 *   **PostgreSQL:** Actúa como la base de datos única para ambos microservicios.
@@ -45,9 +46,10 @@ La forma recomendada de ejecutar el proyecto es a través de Docker Compose, ya 
     *La primera vez, este comando tardará varios minutos en descargar y construir todas las imágenes.*
 
 3.  **Acceder a los servicios:**
-    *   **API Clientes:** `http://localhost:8080`
-    *   **API Cuentas y Movimientos:** `http://localhost:8081`
+    *   **API Gateway:** `http://localhost:9000` (Punto de entrada para todas las APIs)
     *   **RabbitMQ Management:** `http://localhost:15672` (usuario: `guest`, contraseña: `guest`)
+
+    *Nota: Los microservicios (`clientes` y `cuentas`) no están expuestos directamente. Todas las peticiones deben hacerse a través del API Gateway.*
 
 4.  **Probar los endpoints:**
     Puedes usar una herramienta como Postman o los comandos `curl` proporcionados durante el desarrollo para interactuar con las APIs.
@@ -68,7 +70,11 @@ Para facilitar la prueba de la API, se proporciona una colección de Postman lla
 
 A continuación se detallan los endpoints y las validaciones clave a tener en cuenta:
 
-### Microservicio de Clientes (`http://localhost:8080`)
+### Endpoints a través del API Gateway (`http://localhost:9000`)
+
+Todos los endpoints de los microservicios de `Clientes` y `Cuentas` ahora se acceden a través del API Gateway.
+
+#### Endpoints de Clientes
 
 *   **`POST /api/clientes` (Crear Cliente)**
     *   Crea un nuevo cliente.
@@ -83,7 +89,7 @@ A continuación se detallan los endpoints y las validaciones clave a tener en cu
 *   **`DELETE /api/clientes/{id}` (Eliminar Cliente)**
     *   Elimina un cliente por su `id`.
 
-### Microservicio de Cuentas y Movimientos (`http://localhost:8081`)
+#### Endpoints de Cuentas y Movimientos
 
 *   **`POST /api/accounts` (Crear Cuenta)**
     *   Crea una nueva cuenta para un cliente.

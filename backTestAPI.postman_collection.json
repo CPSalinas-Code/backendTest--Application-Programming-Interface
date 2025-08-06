@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e64598e1-dd7a-48e6-aa26-3993905d8ab3",
+		"_postman_id": "988cf2cd-98bc-43b0-8b47-22f43feb9b2f",
 		"name": "backTestAPI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "10429027"
@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Rafael Salinas\",\r\n  \"identification\": \"0104069511\",\r\n  \"address\": \"R crespo y U Nacional\",\r\n  \"phone\": \"0998314929\",\r\n  \"password\": \"password123!\",\r\n  \"status\": true\r\n}",
+							"raw": "{\r\n  \"name\": \"Christian Paul Salinas\",\r\n  \"identification\": \"0104069513\",\r\n  \"address\": \"R crespo y U Nacional\",\r\n  \"phone\": \"0998314929\",\r\n  \"password\": \"password123!\",\r\n  \"status\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,12 +24,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/clientes",
+							"raw": "http://localhost:9000/api/clientes",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9000",
 							"path": [
 								"api",
 								"clientes"
@@ -56,16 +56,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/clientes/26",
+							"raw": "http://localhost:9000/api/clientes",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9000",
 							"path": [
 								"api",
-								"clientes",
-								"26"
+								"clientes"
 							]
 						}
 					},
@@ -86,16 +85,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/clientes/29",
+							"raw": "http://localhost:9000/api/clientes/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "9000",
 							"path": [
 								"api",
 								"clientes",
-								"29"
+								"1"
 							]
 						}
 					},
@@ -154,7 +153,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"accountNumber\": \"123456\",\r\n    \"accountType\": \"Debito\",\r\n    \"initialBalance\": 50,\r\n    \"status\": 1000,\r\n    \"customerId\": 29\r\n}",
+							"raw": "{\r\n    \"accountNumber\": \"123456\",\r\n    \"accountType\": \"Debito\",\r\n    \"initialBalance\": 50,\r\n    \"status\": 1000,\r\n    \"customerId\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -162,12 +161,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/api/accounts",
+							"raw": "http://localhost:9000/api/accounts",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8081",
+							"port": "9000",
 							"path": [
 								"api",
 								"accounts"
@@ -202,12 +201,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/api/accounts/7",
+							"raw": "http://localhost:9000/api/accounts/7",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8081",
+							"port": "9000",
 							"path": [
 								"api",
 								"accounts",
@@ -238,7 +237,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"accountNumber\": \"585545\",\r\n    \"accountType\": \"Corriente\",\r\n    \"initialBalance\": 540,\r\n    \"status\": 1000,\r\n    \"customerId\": 23\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -246,16 +245,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/api/accounts/6",
+							"raw": "http://localhost:9000/api/accounts",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8081",
+							"port": "9000",
 							"path": [
 								"api",
-								"accounts",
-								"6"
+								"accounts"
 							]
 						}
 					},
@@ -287,12 +285,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/api/accounts/1",
+							"raw": "http://localhost:9000/api/accounts/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8081",
+							"port": "9000",
 							"path": [
 								"api",
 								"accounts",
@@ -320,7 +318,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"accountNumber\": \"1234567\",\r\n    \"movementType\": \"Ahorro\",\r\n    \"value\": 100\r\n}",
+							"raw": "{\r\n    \"accountNumber\": \"123456\",\r\n    \"movementType\": \"Ahorro\",\r\n    \"value\": 100\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -328,12 +326,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/api/movements",
+							"raw": "http://localhost:9000/api/movements",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8081",
+							"port": "9000",
 							"path": [
 								"api",
 								"movements"
@@ -363,12 +361,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/api/movements/6",
+							"raw": "http://localhost:9000/api/movements/6",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8081",
+							"port": "9000",
 							"path": [
 								"api",
 								"movements",
@@ -402,12 +400,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/api/movements?accountId=5&startDate=2025-01-01&endDate=2025-12-31",
+							"raw": "http://localhost:9000/api/movements?accountId=1&startDate=2025-01-01&endDate=2025-12-31",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8081",
+							"port": "9000",
 							"path": [
 								"api",
 								"movements"
@@ -415,7 +413,7 @@
 							"query": [
 								{
 									"key": "accountId",
-									"value": "5"
+									"value": "1"
 								},
 								{
 									"key": "startDate",
@@ -436,12 +434,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/api/movements/4",
+							"raw": "http://localhost:9000/api/movements/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8081",
+							"port": "9000",
 							"path": [
 								"api",
 								"movements",
@@ -464,7 +462,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"accountNumber\": \"1234567\",\r\n    \"movementType\": \"Debito\",\r\n    \"value\": -620\r\n}",
+							"raw": "{\r\n    \"accountNumber\": \"123456\",\r\n    \"movementType\": \"Debito\",\r\n    \"value\": -20\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -472,12 +470,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/api/movements",
+							"raw": "http://localhost:9000/api/movements",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8081",
+							"port": "9000",
 							"path": [
 								"api",
 								"movements"
@@ -497,12 +495,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/api/reports?customerId=24&startDate=2025-08-01&endDate=2025-08-04",
+							"raw": "http://localhost:9000/api/reports?customerId=1&startDate=2025-08-01&endDate=2025-08-06",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8081",
+							"port": "9000",
 							"path": [
 								"api",
 								"reports"
@@ -510,7 +508,7 @@
 							"query": [
 								{
 									"key": "customerId",
-									"value": "24"
+									"value": "1"
 								},
 								{
 									"key": "startDate",
@@ -518,7 +516,7 @@
 								},
 								{
 									"key": "endDate",
-									"value": "2025-08-04"
+									"value": "2025-08-06"
 								}
 							]
 						}
