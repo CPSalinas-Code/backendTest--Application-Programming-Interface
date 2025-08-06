@@ -22,14 +22,23 @@ services:
       - "5672:5672"
       - "15672:15672"
 
+  # API Gateway - Unico punto de entrada
+  api-gateway:
+    build:
+      context: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - "9000:9000" # El puerto del gateway que exponemos al exterior
+    depends_on:
+      - clients-app
+      - accounts-app
+
   # Microservicio de Clientes
   clients-app:
     build:
       context: ./microservice-clients
     container_name: clients-app
     restart: on-failure
-    ports:
-      - "8080:8080"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/customerperson_db
       - SPRING_DATASOURCE_USERNAME=postgres
@@ -45,8 +54,6 @@ services:
       context: ./microservice-accounts
     container_name: accounts-app
     restart: on-failure
-    ports:
-      - "8081:8081"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/customerperson_db
       - SPRING_DATASOURCE_USERNAME=postgres
