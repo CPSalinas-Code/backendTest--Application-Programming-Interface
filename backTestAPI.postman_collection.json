@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "988cf2cd-98bc-43b0-8b47-22f43feb9b2f",
+		"_postman_id": "e08f7d95-f609-41c4-8b24-02b0d4951bde",
 		"name": "backTestAPI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "10429027"
@@ -12,8 +12,17 @@
 				{
 					"name": "createClient",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0LXVzZXIiLCJpYXQiOjE3NTQ1MzkyNzEsImV4cCI6MTc1NDU3NTI3MX0.VMwEn3LmUgx4TaDfwrvW-MUzhI3WrULEj0ZSZUEQO00",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n  \"name\": \"Christian Paul Salinas\",\r\n  \"identification\": \"0104069513\",\r\n  \"address\": \"R crespo y U Nacional\",\r\n  \"phone\": \"0998314929\",\r\n  \"password\": \"password123!\",\r\n  \"status\": true\r\n}",
@@ -45,7 +54,13 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer JWTERRONEO",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -65,6 +80,13 @@
 							"path": [
 								"api",
 								"clientes"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -74,7 +96,13 @@
 					"name": "updateClient",
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer JWT",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n  \"name\": \"Christian edit Salinas\",\r\n  \"gender\": \"M\",\r\n  \"age\": 29,\r\n  \"identification\": \"0104069511\",\r\n  \"address\": \"R crespo y U Nacional\",\r\n  \"phone\": \"0998314929\",\r\n  \"password\": \"password123!\",\r\n  \"status\": true\r\n}",
@@ -146,8 +174,8 @@
 								"type": "text"
 							},
 							{
-								"key": "",
-								"value": "",
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0LXVzZXIiLCJpYXQiOjE3NTQ1MzkyNzEsImV4cCI6MTc1NDU3NTI3MX0.VMwEn3LmUgx4TaDfwrvW-MUzhI3WrULEj0ZSZUEQO00",
 								"type": "text"
 							}
 						],
@@ -230,8 +258,8 @@
 								"type": "text"
 							},
 							{
-								"key": "",
-								"value": "",
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0LXVzZXIiLCJpYXQiOjE3NTQ1MzkyNzEsImV4cCI6MTc1NDU3NTI3MX0.VMwEn3LmUgx4TaDfwrvW-MUzhI3WrULEj0ZSZUEQO00",
 								"type": "text"
 							}
 						],
@@ -314,6 +342,11 @@
 								"key": "Content-Type",
 								"value": "application/json",
 								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0LXVzZXIiLCJpYXQiOjE3NTQ1MzkyNzEsImV4cCI6MTc1NDU3NTI3MX0.VMwEn3LmUgx4TaDfwrvW-MUzhI3WrULEj0ZSZUEQO00",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -387,6 +420,11 @@
 							{
 								"key": "Content-Type",
 								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0LXVzZXIiLCJpYXQiOjE3NTQ1MzkyNzEsImV4cCI6MTc1NDU3NTI3MX0.VMwEn3LmUgx4TaDfwrvW-MUzhI3WrULEj0ZSZUEQO00",
 								"type": "text"
 							}
 						],
@@ -493,9 +531,15 @@
 					"name": "getReporte",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0LXVzZXIiLCJpYXQiOjE3NTQ1MzkyNzEsImV4cCI6MTc1NDU3NTI3MX0.VMwEn3LmUgx4TaDfwrvW-MUzhI3WrULEj0ZSZUEQO00",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "http://localhost:9000/api/reports?customerId=1&startDate=2025-08-01&endDate=2025-08-06",
+							"raw": "http://localhost:9000/api/reports?customerId=1&startDate=2025-08-01&endDate=2025-08-09",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -516,7 +560,7 @@
 								},
 								{
 									"key": "endDate",
-									"value": "2025-08-06"
+									"value": "2025-08-09"
 								}
 							]
 						}
@@ -524,6 +568,25 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "getTokenGeneral",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/generate-token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"generate-token"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

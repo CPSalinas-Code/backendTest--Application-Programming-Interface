@@ -9,6 +9,7 @@ Este proyecto implementa una arquitectura de microservicios para simular las ope
 *   **microservice-accounts:** Gestiona las cuentas bancarias y los movimientos asociados (CRUD, lógica de negocio de saldos, reportes).
 *   **PostgreSQL:** Actúa como la base de datos única para ambos microservicios.
 *   **RabbitMQ:** Funciona como message broker para la comunicación asíncrona entre servicios.
+*   **JWT:** Token de seguridad que realiza una validacion centralizada en el Api Gateway para proteger los endpoints.
 
 ## Funcionalidades Implementadas (Requisitos)
 
@@ -59,6 +60,11 @@ La forma recomendada de ejecutar el proyecto es a través de Docker Compose, ya 
     ```bash
     docker-compose down
     ```
+## Seguridad con JWT
+
+La API está protegida mediante JSON Web Tokens (JWT). Todas las peticiones a los endpoints de los microservicios (excepto el de generación de tokens) deben incluir un token de autorización válido en la cabecera.
+
+Normalmente la seguridad con OAuth 2.0 y Jwt genera el token al momento de hacer login en un sistema, pero para este caso por motivos de presentacion, se planteo un endpoint que genere un JWT y que este sea validado en los demas Endpoints, este jwt simula el generado por el servicio externo que consumiria el Api Gateway.
 
 ## Esquema de la Base de Datos
 
@@ -69,6 +75,33 @@ El script para la creación de la base de datos y todas sus tablas se encuentra 
 Para facilitar la prueba de la API, se proporciona una colección de Postman llamada `backTestApi.postman_collection.json`. Puedes importarla en Postman para interactuar con todos los endpoints disponibles.
 
 A continuación se detallan los endpoints y las validaciones clave a tener en cuenta:
+
+### Cómo Probar la Seguridad en Postman
+
+Antes de poder interactuar con los endpoints de la API, necesitas obtener un token de autenticación.
+
+**1. Generar un Token de Prueba:**
+
+Haz una petición `GET` al siguiente endpoint. No requiere autorización. Request `getTokenGeneral`
+
+```
+GET http://localhost:9000/generate-token
+```
+
+Copia el token JWT que se genera en la respuesta.
+
+**2. Configurar el Token en Postman:**
+
+Para todas las demás peticiones, debes incluir el token en una cabecera (`Header`) `Authorization`.
+
+1.  Ve a la pestaña **Headers**.
+2.  Añade una nueva cabecera con la siguiente configuración:
+    *   **KEY:** `Authorization`
+    *   **VALUE:** `Bearer ` (seguido de un espacio) y luego pega el token que copiaste.
+
+
+
+Ahora ya puedes realizar peticiones a los endpoints protegidos.
 
 ### Endpoints a través del API Gateway (`http://localhost:9000`)
 
